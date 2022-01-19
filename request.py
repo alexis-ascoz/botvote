@@ -67,9 +67,13 @@ def vote(username, password, out):
         }
 
         try:
-            result = None
-            while result == None:
-                result = voteWithProxy(url, data, cookies)
+            # With proxy
+            # result = None
+            # while result == None:
+            #     result = voteWithProxy(url, data, cookies)
+
+            # Without proxy
+            result = requests.post(url, data=data, cookies=cookies)
 
             if result.text == '1':
                 print('Vote réussi pour ' + username)

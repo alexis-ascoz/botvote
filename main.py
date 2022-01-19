@@ -1,11 +1,9 @@
-from os import read
 import request
 import time
+import sys
 
-usr = ''
-pwd = ''
 
-def getPoints():
+def getPoints(usr, pwd):
     sum = 0
 
     for i in range(11):
@@ -14,11 +12,9 @@ def getPoints():
     print('Total : ' + str(sum))
 
 
-def vote():
+def voteAll(usr, pwd):
     while True:
         out = request.getOutValue()
-
-        #lineSplit = open("log", "r").readline().split(' ')
 
         for i in range(11):
             timeToSleep = request.vote(usr + str(i), pwd, out)
@@ -26,4 +22,12 @@ def vote():
         time.sleep(timeToSleep)
 
 
-getPoints()
+def vote(usr, pwd):
+    out = request.getOutValue()
+    request.vote(usr, pwd, out)
+
+
+if len(sys.argv) == 3:
+    vote(sys.argv[1], sys.argv[2])
+else:
+    print("Arguments incorrects. 'python3 main.py [username] [password]'")
